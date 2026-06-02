@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <!-- Primary brand gradient: pink → purple → cyan -->
+    <linearGradient id="grad-main" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#EC4899"/>
+      <stop offset="50%"  stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+
+    <!-- Orbit ring gradient (fades out) -->
+    <linearGradient id="grad-orbit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#EC4899" stop-opacity="0"/>
+      <stop offset="30%"  stop-color="#8B5CF6" stop-opacity="0.9"/>
+      <stop offset="70%"  stop-color="#06B6D4" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft inner glow for monogram -->
+    <filter id="glow-strong" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ── Outer orbit ring (partial arc, ~270°) ── -->
+  <!-- Drawn as a stroked circle with dasharray trick -->
+  <circle
+    cx="100" cy="100" r="88"
+    stroke="url(#grad-orbit)"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-dasharray="460 100"
+    stroke-dashoffset="-20"
+    filter="url(#glow)"
+  />
+
+  <!-- Orbit end-cap dot (top-right) -->
+  <circle cx="162" cy="38" r="3" fill="#EC4899" opacity="0.9" filter="url(#glow)"/>
+
+  <!-- Orbit end-cap dot (bottom-left) -->
+  <circle cx="38" cy="162" r="2" fill="#06B6D4" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- ── Inner thin ring ── -->
+  <circle
+    cx="100" cy="100" r="74"
+    stroke="url(#grad-main)"
+    stroke-width="0.5"
+    stroke-dasharray="8 6"
+    opacity="0.25"
+  />
+
+  <!-- ── NW Monogram ── -->
+  <!--
+    Geometric construction:
+    • N: two vertical strokes + diagonal
+    • W: two V-shapes merged
+    • Both share the center vertical axis
+    • Stroke-based, sharp caps, uniform weight
+  -->
+  <g filter="url(#glow-strong)">
+    <!-- N left vertical -->
+    <line x1="62" y1="68" x2="62" y2="132" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+    <!-- N diagonal -->
+    <line x1="62" y1="68" x2="100" y2="132" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+    <!-- N right vertical (shared with W left vertical) -->
+    <line x1="100" y1="68" x2="100" y2="132" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+
+    <!-- W left-outer diagonal down -->
+    <line x1="100" y1="68" x2="119" y2="132" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+    <!-- W center-up diagonal -->
+    <line x1="119" y1="132" x2="129" y2="100" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+    <!-- W center-down diagonal -->
+    <line x1="129" y1="100" x2="138" y2="132" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+    <!-- W right-outer diagonal up -->
+    <line x1="138" y1="132" x2="138" y2="68" stroke="url(#grad-main)" stroke-width="7" stroke-linecap="square"/>
+  </g>
+
+  <!-- ── Corner accent dots ── -->
+  <circle cx="62"  cy="68"  r="3.5" fill="#EC4899" opacity="0.9"/>
+  <circle cx="138" cy="68"  r="3.5" fill="#06B6D4" opacity="0.9"/>
+  <circle cx="62"  cy="132" r="3.5" fill="#8B5CF6" opacity="0.9"/>
+  <circle cx="138" cy="132" r="3.5" fill="#06B6D4" opacity="0.9"/>
+</svg>

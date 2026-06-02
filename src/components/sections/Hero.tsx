@@ -69,8 +69,8 @@ export function Hero() {
             variants={item}
             className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            We create premium digital experiences that help businesses grow online.
-            Every pixel crafted with purpose. Every interaction designed to convert.
+            We build modern websites, landing pages, and e-commerce experiences
+            that help businesses attract customers and grow online.
           </motion.p>
 
           {/* Buttons */}
@@ -84,9 +84,10 @@ export function Hero() {
             </MagneticButton>
             <MagneticButton
               onClick={() => scrollTo('contact')}
-              className="flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-white font-semibold text-sm hover:border-violet/40 hover:bg-white/5 transition-all duration-300"
+              className="group flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-white font-semibold text-sm hover:border-violet/40 hover:bg-white/5 transition-all duration-300"
             >
-              Start Project
+              Start Your Project
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform opacity-0 group-hover:opacity-100" />
             </MagneticButton>
           </motion.div>
 

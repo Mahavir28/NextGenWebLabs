@@ -1,43 +1,39 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, ExternalLink } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
 
 const projects = [
   {
-    title: 'LuxeCommerce',
-    category: 'E-Commerce',
-    desc: 'A premium fashion e-commerce platform with immersive product experiences and seamless checkout.',
-    tags: ['React', 'TypeScript', 'Stripe'],
-    color: '#8B5CF6',
-    bg: 'from-violet/30 via-blue/20 to-transparent',
-    stats: '340% conversion increase',
-  },
-  {
-    title: 'ArchStudio',
-    category: 'Portfolio',
-    desc: 'Award-winning architecture firm portfolio with cinematic project showcases and 3D walkthroughs.',
-    tags: ['Next.js', 'GSAP', 'Three.js'],
-    color: '#06B6D4',
-    bg: 'from-accent/30 via-violet/20 to-transparent',
-    stats: '5x more client inquiries',
-  },
-  {
-    title: 'FinanceFlow',
+    title: 'TheTravelWays',
     category: 'Business Website',
-    desc: 'A fintech startup website that communicates trust, security, and innovation at every scroll.',
-    tags: ['React', 'Framer Motion', 'TailwindCSS'],
-    color: '#3B82F6',
-    bg: 'from-blue/30 via-accent/20 to-transparent',
-    stats: '2.8x lead generation',
+    desc: 'A full-featured travel agency website with destination showcases, tour packages, and seamless booking experience.',
+    color: '#8B5CF6',
+    bg: 'from-violet/40 via-blue/20 to-transparent',
+    accent: '#8B5CF6',
   },
   {
-    title: 'NovaSaaS',
+    title: 'Car Rental Website',
+    category: 'E-Commerce',
+    desc: 'Modern car rental platform with real-time availability, fleet showcase, and frictionless online reservation flow.',
+    color: '#06B6D4',
+    bg: 'from-accent/40 via-violet/20 to-transparent',
+    accent: '#06B6D4',
+  },
+  {
+    title: 'Business Landing Page',
     category: 'Landing Page',
-    desc: 'High-converting SaaS landing page with interactive demos and social proof that drives signups.',
-    tags: ['React', 'TypeScript', 'Lottie'],
+    desc: 'High-converting landing page designed to capture leads and communicate brand value with precision.',
+    color: '#3B82F6',
+    bg: 'from-blue/40 via-accent/20 to-transparent',
+    accent: '#3B82F6',
+  },
+  {
+    title: 'Portfolio Website',
+    category: 'Portfolio',
+    desc: 'Elegant personal portfolio with project showcases, smooth animations, and a strong personal brand identity.',
     color: '#8B5CF6',
-    bg: 'from-violet/30 via-accent/20 to-transparent',
-    stats: '68% signup rate',
+    bg: 'from-violet/40 via-blue/10 to-transparent',
+    accent: '#8B5CF6',
   },
 ]
 
@@ -45,59 +41,77 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   return (
     <Reveal delay={index * 0.1} direction={index % 2 === 0 ? 'left' : 'right'}>
       <motion.div
-        className="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-card cursor-pointer"
-        whileHover={{ scale: 1.02, transition: { duration: 0.4, ease: 'easeOut' } }}
+        className="group relative rounded-2xl overflow-hidden cursor-pointer h-full"
+        style={{
+          background: 'rgba(10,10,10,0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: `1px solid rgba(255,255,255,0.06)`,
+        }}
+        whileHover={{
+          scale: 1.02,
+          y: -6,
+          transition: { duration: 0.4, ease: 'easeOut' },
+        }}
       >
-        {/* Image area */}
-        <div className="relative h-64 overflow-hidden">
-          {/* Gradient placeholder */}
+        {/* Image / Visual area */}
+        <div className="relative h-60 overflow-hidden">
           <motion.div
             className={`absolute inset-0 bg-gradient-to-br ${project.bg}`}
             whileHover={{ scale: 1.08 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           />
 
-          {/* Grid pattern inside card */}
+          {/* Grid pattern */}
           <div
             className="absolute inset-0 opacity-20"
             style={{
-              backgroundImage: `linear-gradient(${project.color}22 1px, transparent 1px), linear-gradient(90deg, ${project.color}22 1px, transparent 1px)`,
-              backgroundSize: '30px 30px',
+              backgroundImage: `linear-gradient(${project.color}30 1px, transparent 1px), linear-gradient(90deg, ${project.color}30 1px, transparent 1px)`,
+              backgroundSize: '28px 28px',
             }}
           />
 
-          {/* Floating mock UI elements */}
+          {/* Mock browser UI */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              className="w-48 h-32 rounded-xl glass border border-white/10 flex flex-col gap-2 p-4"
-              initial={{ y: 10, opacity: 0.6 }}
+              className="w-52 h-36 rounded-xl flex flex-col gap-2 p-4 overflow-hidden"
+              style={{
+                background: 'rgba(8,8,8,0.75)',
+                backdropFilter: 'blur(12px)',
+                border: `1px solid ${project.color}25`,
+              }}
+              initial={{ y: 8, opacity: 0.7 }}
               whileHover={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="flex gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-red-400/60" />
-                <div className="w-2 h-2 rounded-full bg-yellow-400/60" />
-                <div className="w-2 h-2 rounded-full bg-green-400/60" />
+              <div className="flex gap-1.5 mb-1">
+                <div className="w-2 h-2 rounded-full bg-red-400/50" />
+                <div className="w-2 h-2 rounded-full bg-yellow-400/50" />
+                <div className="w-2 h-2 rounded-full bg-green-400/50" />
               </div>
-              <div className="h-2 rounded bg-white/10 w-3/4" />
-              <div className="h-2 rounded bg-white/10 w-1/2" />
-              <div className="h-8 rounded-lg mt-1" style={{ background: `${project.color}33` }} />
+              <div className="h-2 rounded-full w-3/4" style={{ background: `${project.color}30` }} />
+              <div className="h-2 rounded-full w-1/2" style={{ background: `${project.color}20` }} />
+              <div className="h-10 rounded-lg mt-1" style={{ background: `${project.color}25` }} />
+              <div className="flex gap-2">
+                <div className="h-2 rounded-full flex-1" style={{ background: `${project.color}15` }} />
+                <div className="h-2 rounded-full w-1/3" style={{ background: `${project.color}15` }} />
+              </div>
             </motion.div>
           </div>
 
-          {/* Glow overlay on hover */}
+          {/* Hover glow overlay */}
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{
-              background: `radial-gradient(circle at 50% 50%, ${project.color}20 0%, transparent 70%)`,
+              background: `radial-gradient(circle at 50% 50%, ${project.color}25 0%, transparent 65%)`,
             }}
           />
 
           {/* Category badge */}
           <div className="absolute top-4 left-4">
             <span
-              className="px-3 py-1 rounded-full text-xs font-medium border"
-              style={{ borderColor: `${project.color}40`, color: project.color, background: `${project.color}15` }}
+              className="px-3 py-1 rounded-full text-xs font-semibold"
+              style={{ borderColor: `${project.color}40`, color: project.color, background: `${project.color}18`, border: `1px solid ${project.color}35` }}
             >
               {project.category}
             </span>
@@ -105,47 +119,52 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
           {/* Arrow icon */}
           <motion.div
-            className="absolute top-4 right-4 w-8 h-8 rounded-full glass border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+            style={{ background: `${project.color}20`, border: `1px solid ${project.color}40` }}
             whileHover={{ scale: 1.1 }}
           >
-            <ArrowUpRight size={14} className="text-white" />
+            <ArrowUpRight size={15} style={{ color: project.color }} />
           </motion.div>
         </div>
 
         {/* Content */}
         <div className="p-6">
-          <div className="flex items-start justify-between mb-3">
-            <h3 className="text-xl font-bold text-white group-hover:text-gradient transition-all">
-              {project.title}
-            </h3>
-            <ExternalLink size={16} className="text-white/20 group-hover:text-white/60 transition-colors mt-1" />
-          </div>
-          <p className="text-sm text-white/40 leading-relaxed mb-4 group-hover:text-white/60 transition-colors">
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gradient transition-all duration-300">
+            {project.title}
+          </h3>
+          <p className="text-sm text-white/40 leading-relaxed mb-5 group-hover:text-white/65 transition-colors duration-300">
             {project.desc}
           </p>
 
-          {/* Stats */}
-          <div
-            className="text-xs font-semibold mb-4 px-3 py-1.5 rounded-full inline-block"
-            style={{ color: project.color, background: `${project.color}15` }}
+          <motion.button
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-300"
+            style={{
+              color: project.color,
+              background: `${project.color}12`,
+              border: `1px solid ${project.color}30`,
+            }}
+            whileHover={{
+              background: `${project.color}22`,
+              scale: 1.03,
+            }}
           >
-            ↑ {project.stats}
-          </div>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span key={tag} className="px-2.5 py-1 rounded-md text-xs text-white/40 border border-white/[0.06] bg-white/[0.02]">
-                {tag}
-              </span>
-            ))}
-          </div>
+            View Project
+            <ArrowUpRight size={12} />
+          </motion.button>
         </div>
 
         {/* Bottom glow line */}
-        <motion.div
+        <div
           className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }}
+          style={{ background: `linear-gradient(90deg, transparent, ${project.color}90, transparent)` }}
+        />
+
+        {/* Border glow on hover */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            boxShadow: `0 0 0 1px ${project.color}30, 0 16px 60px ${project.color}15`,
+          }}
         />
       </motion.div>
     </Reveal>
@@ -154,7 +173,16 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export function Projects() {
   return (
-    <section id="projects" className="py-32 px-6 relative">
+    <section id="projects" className="py-32 px-6 relative overflow-hidden">
+      {/* Background glow */}
+      <div
+        className="absolute top-0 right-0 w-[700px] h-[500px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+
       <div className="max-w-7xl mx-auto">
         <Reveal className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 text-xs text-accent mb-6">
@@ -165,7 +193,7 @@ export function Projects() {
             <span className="text-gradient">Speak Results</span>
           </h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">
-            Every project is a story of transformation — from ordinary to extraordinary.
+            A selection of websites and experiences we've crafted for real businesses.
           </p>
         </Reveal>
 

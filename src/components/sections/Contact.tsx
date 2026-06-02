@@ -60,8 +60,8 @@ export function Contact() {
           <Reveal className="lg:col-span-2" direction="left">
             <div className="flex flex-col gap-6 h-full">
               {[
-                { icon: Mail, label: 'Email Us', value: 'hello@nextgenweblabs.com', color: '#8B5CF6' },
-                { icon: MessageSquare, label: 'WhatsApp', value: '+91 98765 43210', color: '#06B6D4' },
+                { icon: Mail, label: 'Email Us', value: 'hello.nextgenweblabs@gmail.com', color: '#8B5CF6' },
+                { icon: MessageSquare, label: 'WhatsApp', value: '+91 73837 87379', color: '#06B6D4' },
                 { icon: User, label: 'Response Time', value: 'Within 24 hours', color: '#3B82F6' },
               ].map(({ icon: Icon, label, value, color }) => (
                 <motion.div

@@ -1,84 +1,67 @@
-import { Star } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
 
-const testimonials = [
+const placeholders = [
   {
-    name: 'Arjun Mehta',
-    role: 'CEO, TechVentures',
-    text: 'NextGen Web Labs transformed our online presence completely. The website they built increased our leads by 300% in the first month.',
-    rating: 5,
+    title: 'Project Demo Feedback',
+    desc: 'Client success story coming soon.',
     color: '#8B5CF6',
+    icon: '🚀',
   },
   {
-    name: 'Priya Sharma',
-    role: 'Founder, StyleCo',
-    text: 'Absolutely stunning work. Our e-commerce store looks like it belongs to a Fortune 500 company. Sales doubled within weeks.',
-    rating: 5,
+    title: 'Website Review',
+    desc: 'Client success story coming soon.',
     color: '#06B6D4',
+    icon: '⭐',
   },
   {
-    name: 'Rahul Gupta',
-    role: 'Director, FinanceHub',
-    text: 'The attention to detail is unmatched. Every animation, every hover effect — it all feels intentional and premium.',
-    rating: 5,
+    title: 'Development Collaboration',
+    desc: 'Client success story coming soon.',
     color: '#3B82F6',
+    icon: '🤝',
   },
   {
-    name: 'Sneha Patel',
-    role: 'Creative Director, DesignLab',
-    text: 'I\'ve worked with many agencies. NextGen Web Labs is in a different league. They understand design at a deep level.',
-    rating: 5,
+    title: 'Project Demo Feedback',
+    desc: 'Client success story coming soon.',
     color: '#8B5CF6',
+    icon: '🚀',
   },
   {
-    name: 'Vikram Singh',
-    role: 'CTO, CloudBase',
-    text: 'Clean code, fast performance, beautiful design. They delivered everything on time and exceeded every expectation.',
-    rating: 5,
+    title: 'Website Review',
+    desc: 'Client success story coming soon.',
     color: '#06B6D4',
+    icon: '⭐',
   },
   {
-    name: 'Ananya Roy',
-    role: 'Marketing Head, GrowthCo',
-    text: 'Our landing page conversion rate went from 2% to 11% after the redesign. The ROI speaks for itself.',
-    rating: 5,
+    title: 'Development Collaboration',
+    desc: 'Client success story coming soon.',
     color: '#3B82F6',
+    icon: '🤝',
   },
 ]
 
-function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
+function PlaceholderCard({ item }: { item: typeof placeholders[0] }) {
   return (
-    <div className="flex-shrink-0 w-80 mx-3 rounded-2xl glass border border-white/[0.06] p-6 relative overflow-hidden group">
+    <div className="flex-shrink-0 w-72 mx-3 rounded-2xl glass border border-white/[0.06] p-6 relative overflow-hidden group">
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-        style={{ background: `radial-gradient(circle at 50% 50%, ${t.color}10 0%, transparent 70%)` }}
+        style={{ background: `radial-gradient(circle at 50% 50%, ${item.color}12 0%, transparent 70%)` }}
       />
       <div className="relative z-10">
-        <div className="flex gap-1 mb-4">
-          {Array.from({ length: t.rating }).map((_, i) => (
-            <Star key={i} size={12} className="fill-current" style={{ color: t.color }} />
-          ))}
-        </div>
-        <p className="text-sm text-white/60 leading-relaxed mb-5">"{t.text}"</p>
-        <div className="flex items-center gap-3">
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
-            style={{ background: `${t.color}25`, color: t.color }}
-          >
-            {t.name[0]}
-          </div>
-          <div>
-            <div className="text-sm font-semibold text-white">{t.name}</div>
-            <div className="text-xs text-white/30">{t.role}</div>
-          </div>
-        </div>
+        <div className="text-2xl mb-4">{item.icon}</div>
+        <h4 className="text-sm font-semibold text-white mb-2">{item.title}</h4>
+        <p className="text-xs text-white/30 leading-relaxed italic">{item.desc}</p>
+        <div
+          className="mt-4 h-px w-full"
+          style={{ background: `linear-gradient(90deg, ${item.color}40, transparent)` }}
+        />
+        <p className="mt-3 text-xs font-medium" style={{ color: item.color }}>Coming Soon</p>
       </div>
     </div>
   )
 }
 
 export function Testimonials() {
-  const doubled = [...testimonials, ...testimonials]
+  const doubled = [...placeholders, ...placeholders]
 
   return (
     <section id="testimonials" className="py-32 relative overflow-hidden">
@@ -93,13 +76,13 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <Reveal className="text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent/20 text-xs text-accent mb-6">
-            Client Love
+            Social Proof
           </div>
           <h2 className="text-[clamp(36px,5vw,56px)] font-black text-white leading-tight mb-4">
-            What Clients <span className="text-gradient">Say</span>
+            Client Success <span className="text-gradient">Stories</span>
           </h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">
-            Don't take our word for it — hear from the businesses we've transformed.
+            Client Success Stories Coming Soon
           </p>
         </Reveal>
       </div>
@@ -111,7 +94,7 @@ export function Testimonials() {
         <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(-90deg, #050505, transparent)' }} />
         <div className="flex animate-marquee">
-          {doubled.map((t, i) => <TestimonialCard key={i} t={t} />)}
+          {doubled.map((item, i) => <PlaceholderCard key={i} item={item} />)}
         </div>
       </div>
 
@@ -122,7 +105,7 @@ export function Testimonials() {
         <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(-90deg, #050505, transparent)' }} />
         <div className="flex animate-marquee2" style={{ animationDirection: 'reverse' }}>
-          {doubled.map((t, i) => <TestimonialCard key={i} t={t} />)}
+          {doubled.map((item, i) => <PlaceholderCard key={i} item={item} />)}
         </div>
       </div>
     </section>

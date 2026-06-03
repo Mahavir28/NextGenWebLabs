@@ -1,26 +1,31 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Mail, MessageSquare, User, CheckCircle, ArrowRight } from 'lucide-react'
+import { Send, Mail, MessageSquare, MapPin, CheckCircle, ArrowRight } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
 import { MagneticButton } from '../ui/MagneticButton'
 
-const services = [
-  'Business Website',
-  'Portfolio Website',
-  'Landing Page',
-  'E-Commerce',
-  'Maintenance',
-  'UI/UX Improvements',
-]
-
 export function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', service: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    const text = `Hi NextGen Web Labs! 👋
+
+Name: ${form.name}
+Email: ${form.email}
+Phone: ${form.phone || 'N/A'}
+Company: ${form.company || 'N/A'}
+
+Project Details:
+${form.message}`
+    window.open(`https://wa.me/917383787379?text=${encodeURIComponent(text)}`, '_blank')
     setSubmitted(true)
+    setTimeout(() => {
+      setSubmitted(false)
+      setForm({ name: '', email: '', company: '', phone: '', message: '' })
+    }, 5000)
   }
 
   const inputClass = (field: string) =>
@@ -32,7 +37,6 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-32 px-6 relative overflow-hidden">
-      {/* Glow */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full pointer-events-none"
         style={{
@@ -47,25 +51,25 @@ export function Contact() {
             Get In Touch
           </div>
           <h2 className="text-[clamp(36px,5vw,56px)] font-black text-white leading-tight mb-4">
-            Let's Build Something{' '}
-            <span className="text-gradient">Extraordinary</span>
+            Let's Build Your{' '}
+            <span className="text-gradient">Next Website</span>
           </h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">
-            Ready to transform your online presence? Tell us about your project.
+            Ready to grow your business online? Let's discuss your project.
           </p>
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Left info */}
           <Reveal className="lg:col-span-2" direction="left">
-            <div className="flex flex-col gap-6 h-full">
+            <div className="flex flex-col gap-4 h-full">
               {[
-                { icon: Mail, label: 'Email Us', value: 'hello.nextgenweblabs@gmail.com', color: '#8B5CF6' },
-                { icon: MessageSquare, label: 'WhatsApp', value: '+91 73837 87379', color: '#06B6D4' },
-                { icon: User, label: 'Response Time', value: 'Within 24 hours', color: '#3B82F6' },
-              ].map(({ icon: Icon, label, value, color }) => (
-                <motion.div
+                { icon: Mail, label: 'Email Us', value: 'hello.nextgenweblabs@gmail.com', color: '#8B5CF6', href: 'mailto:hello.nextgenweblabs@gmail.com' },
+                { icon: MapPin, label: 'Location', value: 'Ahmedabad, Gujarat', color: '#3B82F6', href: null },
+              ].map(({ icon: Icon, label, value, color, href }) => (
+                <motion.a
                   key={label}
+                  href={href ?? undefined}
                   className="group flex items-center gap-4 p-4 rounded-xl border border-white/[0.06] bg-card"
                   whileHover={{ scale: 1.02, x: 4 }}
                 >
@@ -79,8 +83,26 @@ export function Contact() {
                     <div className="text-xs text-white/30 mb-0.5">{label}</div>
                     <div className="text-sm font-medium text-white">{value}</div>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
+
+              {/* WhatsApp CTA */}
+              <motion.a
+                href="https://wa.me/917383787379"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 p-4 rounded-xl border border-[#25D366]/30 bg-[#25D366]/5"
+                whileHover={{ scale: 1.02, x: 4 }}
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#25D366]/20 border border-[#25D366]/30">
+                  <MessageSquare size={18} className="text-[#25D366]" />
+                </div>
+                <div className="flex-1">
+                  <div className="text-xs text-white/30 mb-0.5">WhatsApp</div>
+                  <div className="text-sm font-medium text-white">Chat with us</div>
+                </div>
+                <ArrowRight size={14} className="text-[#25D366] group-hover:translate-x-1 transition-transform" />
+              </motion.a>
 
               {/* Trust badge */}
               <div className="mt-auto p-5 rounded-xl border border-violet/20 bg-violet/5">
@@ -120,6 +142,7 @@ export function Contact() {
                     </motion.div>
                     <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
                     <p className="text-white/40 text-sm">We'll get back to you within 24 hours.</p>
+                    <p className="text-white/20 text-xs mt-3">Form resets in 5 seconds...</p>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -155,20 +178,30 @@ export function Contact() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="text-xs text-white/30 mb-1.5 block">Service Needed</label>
-                      <select
-                        className={`${inputClass('service')} cursor-pointer`}
-                        value={form.service}
-                        onChange={(e) => setForm({ ...form, service: e.target.value })}
-                        onFocus={() => setFocused('service')}
-                        onBlur={() => setFocused(null)}
-                        required
-                        style={{ colorScheme: 'dark' }}
-                      >
-                        <option value="" disabled>Select a service...</option>
-                        {services.map((s) => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs text-white/30 mb-1.5 block">Company</label>
+                        <input
+                          className={inputClass('company')}
+                          placeholder="Your company name"
+                          value={form.company}
+                          onChange={(e) => setForm({ ...form, company: e.target.value })}
+                          onFocus={() => setFocused('company')}
+                          onBlur={() => setFocused(null)}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-white/30 mb-1.5 block">Phone Number</label>
+                        <input
+                          type="tel"
+                          className={inputClass('phone')}
+                          placeholder="+91 98765 43210"
+                          value={form.phone}
+                          onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                          onFocus={() => setFocused('phone')}
+                          onBlur={() => setFocused(null)}
+                        />
+                      </div>
                     </div>
 
                     <div>

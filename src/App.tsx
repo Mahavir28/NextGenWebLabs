@@ -12,6 +12,7 @@ import { Contact } from './components/sections/Contact'
 import { LogoShowcase } from './components/sections/LogoShowcase'
 import { Footer } from './components/Footer'
 import { StickyCTA } from './components/StickyCTA'
+import { About } from './pages/About'
 
 export default function App() {
   useLenis()
@@ -32,6 +33,9 @@ export default function App() {
       <Founders />
       <LogoShowcase />
       <Testimonials />
+      <section id="about">
+        <About />
+      </section>
       <Contact />
       <Footer />
       <StickyCTA />

@@ -5,21 +5,21 @@ import { Reveal } from '../ui/Reveal'
 const founders = [
   {
     name: 'Mahavir Shah',
-    role: 'Co-Founder & Lead Developer',
-    bio: 'Full-stack developer with a passion for building premium digital experiences. Specializes in React, TypeScript, and performance optimization.',
+    role: 'Co-Founder & Full Stack Developer',
+    bio: 'Full-stack developer with a passion for building premium digital experiences. Specializes in React, TypeScript, and cloud infrastructure.',
     initials: 'MS',
     color: '#8B5CF6',
     gradient: 'from-violet/30 to-blue/20',
-    skills: ['React', 'TypeScript', 'Node.js', 'UI/UX'],
+    skills: ['React', 'TypeScript', 'Node.js', 'AWS'],
   },
   {
     name: 'Krishna',
-    role: 'Co-Founder & Creative Director',
-    bio: 'Creative visionary who transforms brand identities into stunning digital experiences. Expert in design systems and motion design.',
+    role: 'Co-Founder',
+    bio: 'Drives business growth and client relationships. Focused on project delivery, partnerships, and helping businesses succeed online.',
     initials: 'K',
     color: '#06B6D4',
     gradient: 'from-accent/30 to-violet/20',
-    skills: ['Figma', 'Motion Design', 'Branding', 'Strategy'],
+    skills: ['Business Development', 'Client Relations', 'Project Management'],
   },
 ]
 
@@ -40,10 +40,10 @@ export function Founders() {
             The Team
           </div>
           <h2 className="text-[clamp(36px,5vw,56px)] font-black text-white leading-tight mb-4">
-            Meet the <span className="text-gradient">Founders</span>
+            Meet The <span className="text-gradient">Founders</span>
           </h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">
-            Two passionate builders on a mission to redefine what a web agency can be.
+            The people behind NextGen Web Labs, passionate about building modern websites and digital experiences.
           </p>
         </Reveal>
 
@@ -105,16 +105,15 @@ export function Founders() {
 
                   {/* Social */}
                   <div className="flex gap-3">
-                    {[ExternalLink, ExternalLink, ExternalLink].map((Icon, idx) => (
-                      <motion.button
-                        key={idx}
-                        className="w-8 h-8 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-white/30 hover:text-white hover:border-white/20 transition-colors"
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Icon size={14} />
-                      </motion.button>
-                    ))}
+                    <motion.a
+                      href="#"
+                      aria-label="LinkedIn"
+                      className="w-8 h-8 rounded-lg border border-white/[0.06] bg-white/[0.02] flex items-center justify-center text-white/30 hover:text-white hover:border-white/20 transition-colors"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ExternalLink size={14} />
+                    </motion.a>
                   </div>
                 </div>
 

@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { MagneticButton } from './ui/MagneticButton'
 import { Logo } from './ui/Logo'
 
-const links = ['Services', 'Projects', 'Process', 'Team', 'Contact']
+const links = ['Services', 'Projects', 'Process', 'Team', 'About', 'Contact']
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)

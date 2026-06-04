@@ -7,9 +7,10 @@ interface MagneticButtonProps {
   className?: string
   onClick?: () => void
   strength?: number
+  disabled?: boolean
 }
 
-export function MagneticButton({ children, className = '', onClick, strength = 0.3 }: MagneticButtonProps) {
+export function MagneticButton({ children, className = '', onClick, strength = 0.3, disabled = false }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null)
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -39,6 +40,7 @@ export function MagneticButton({ children, className = '', onClick, strength = 0
       ref={ref}
       className={className}
       onClick={onClick}
+      disabled={disabled}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}

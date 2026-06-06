@@ -1,49 +1,31 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import emailjs from '@emailjs/browser'
-import { Send, Mail, MessageSquare, MapPin, CheckCircle, ArrowRight, Loader2 } from 'lucide-react'
+import { Send, Mail, MessageSquare, MapPin, CheckCircle, ArrowRight } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
 import { MagneticButton } from '../ui/MagneticButton'
 
-// EmailJS config — replace these with your actual EmailJS credentials
-const EMAILJS_SERVICE_ID = 'service_nextgenweb'
-const EMAILJS_TEMPLATE_ID = 'template_contact'
-const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY'
-
 export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [submitted, setSubmitted] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
-  const [errorMsg, setErrorMsg] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setStatus('loading')
-    setErrorMsg('')
+    const text = `Hi NextGen Web Labs! 👋
 
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          from_email: form.email,
-          company: form.company || 'N/A',
-          phone: form.phone || 'N/A',
-          message: form.message,
-          to_email: 'hello.nextgenweblabs@gmail.com',
-        },
-        EMAILJS_PUBLIC_KEY
-      )
-      setStatus('success')
-      setTimeout(() => {
-        setStatus('idle')
-        setForm({ name: '', email: '', company: '', phone: '', message: '' })
-      }, 5000)
-    } catch {
-      setStatus('error')
-      setErrorMsg('Something went wrong. Please try again or reach us on WhatsApp.')
-    }
+Name: ${form.name}
+Email: ${form.email}
+Phone: ${form.phone || 'N/A'}
+Company: ${form.company || 'N/A'}
+
+Project Details:
+${form.message}`
+    window.open(`https://wa.me/917383787379?text=${encodeURIComponent(text)}`, '_blank')
+    setSubmitted(true)
+    setTimeout(() => {
+      setSubmitted(false)
+      setForm({ name: '', email: '', company: '', phone: '', message: '' })
+    }, 5000)
   }
 
   const inputClass = (field: string) =>
@@ -144,7 +126,7 @@ export function Contact() {
               />
 
               <AnimatePresence mode="wait">
-                {status === 'success' ? (
+                {submitted ? (
                   <motion.div
                     key="success"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -193,7 +175,6 @@ export function Contact() {
                           onFocus={() => setFocused('email')}
                           onBlur={() => setFocused(null)}
                           required
-                          disabled={status === 'loading'}
                         />
                       </div>
                     </div>
@@ -208,7 +189,6 @@ export function Contact() {
                           onChange={(e) => setForm({ ...form, company: e.target.value })}
                           onFocus={() => setFocused('company')}
                           onBlur={() => setFocused(null)}
-                          disabled={status === 'loading'}
                         />
                       </div>
                       <div>
@@ -221,7 +201,6 @@ export function Contact() {
                           onChange={(e) => setForm({ ...form, phone: e.target.value })}
                           onFocus={() => setFocused('phone')}
                           onBlur={() => setFocused(null)}
-                          disabled={status === 'loading'}
                         />
                       </div>
                     </div>
@@ -237,36 +216,15 @@ export function Contact() {
                         onFocus={() => setFocused('message')}
                         onBlur={() => setFocused(null)}
                         required
-                        disabled={status === 'loading'}
                       />
                     </div>
 
-                    {status === 'error' && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-xs text-red-400 px-1"
-                      >
-                        {errorMsg}
-                      </motion.p>
-                    )}
-
                     <MagneticButton
-                      className="group w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-primary text-white font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-violet/20 disabled:opacity-60 disabled:cursor-not-allowed"
-                      disabled={status === 'loading'}
+                      className="group w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-gradient-primary text-white font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-violet/20"
                     >
-                      {status === 'loading' ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} />
-                          Send Message
-                          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
+                      <Send size={16} />
+                      Send Message
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </MagneticButton>
                   </motion.form>
                 )}
